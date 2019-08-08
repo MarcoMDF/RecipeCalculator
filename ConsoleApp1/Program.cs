@@ -101,49 +101,96 @@ namespace RecipeCalculator
                     //minus the material B's you already have = the material B's you still need.
                     double materialBNeed = Convert.ToDouble(auxARounded) * 60 - materialB;
                     double materialCNeed = Convert.ToDouble(auxARounded) * 20 - materialC;
-                    Console.WriteLine(">You need to buy a total of " + materialBNeed + " Craft Kits and " + materialCNeed + " production points.");
+                    Console.WriteLine(">You need to buy " + materialBNeed + " more Craft Kits and " + materialCNeed + " more production points.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxARounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 else if (auxBRounded > auxARounded & auxBRounded > auxCRounded)
                 {
                     double materialANeed = Convert.ToDouble(auxBRounded) * 5 - materialA;
                     double materialCNeed = Convert.ToDouble(auxBRounded) * 20 - materialC;
-                    Console.WriteLine(">You need to buy a total of " + materialANeed + " Golden Talents and " + materialCNeed + " production points.");
+                    Console.WriteLine(">You need to buy a total of " + materialANeed + " Golden Talents and " + materialCNeed + " more production points.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxBRounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 else if (auxCRounded > auxARounded & auxCRounded > auxBRounded)
                 {
                     double materialANeed = Convert.ToDouble(auxCRounded) * 5 - materialA;
                     double materialBNeed = Convert.ToDouble(auxCRounded) * 60 - materialB;
                     Console.WriteLine(">You need to buy a total of " + materialANeed + " Golden Talents and " + materialBNeed + " Craft Kits.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxCRounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 //---*--- RARE-ish EXCEPTIONS ---*---
                 //All of them can produce the same amount of produce or there is no produce that can be crafted
                 else if (auxARounded.Equals(auxBRounded & auxCRounded))
                 {
                     Console.WriteLine(">You either already have the perfect amount of materials or not enough of all of them. Stock up on one of them and retry!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxARounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 //A equals B and both are bigger than C
                 else if (auxARounded.Equals(auxBRounded) & auxARounded > auxCRounded)
                 {
                     double materialCNeed = Convert.ToDouble(auxARounded) * 20 - materialC;
                     Console.WriteLine(">You are missing " + materialCNeed + " production points. Consider buying an Elinu's Tear potion from the Trade Broker or Vanguard Special Rewards Vendor.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxARounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 //A equals C and both are bigger than B
                 else if (auxARounded.Equals(auxCRounded) & auxARounded > auxBRounded)
                 {
                     double materialBNeed = Convert.ToDouble(auxARounded) * 60 - materialB;
                     Console.WriteLine(">You are missing " + materialBNeed + " Craft Kits.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxARounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
                 //B equals C and both are bigger than A
                 else if (auxBRounded.Equals(auxCRounded) & auxBRounded > auxARounded)
                 {
                     double materialANeed = Convert.ToDouble(auxARounded) * 5 - materialA;
                     Console.WriteLine(">You are missing " + materialANeed + " Golden Talents.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(">You can then create Golden Daric a total of ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(auxBRounded);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" times.");
                 }
             }
             else
             {
                 return;
             }
+#if DEBUG
+            Console.WriteLine("Press enter to close...");
+            Console.ReadLine();
+#endif
         }
     }
 }
