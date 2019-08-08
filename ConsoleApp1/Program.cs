@@ -8,17 +8,17 @@ namespace RecipeCalculator
         static void Main(string[] args)
         {
             //Lowest price for which you can buy Golden Talents from the Trade Broker.
-            Console.Write("Price for Golden Talent: ");
+            Console.WriteLine(">Price for Golden Talent: ");
             double goldenTalent_Price = Convert.ToDouble(Console.ReadLine());
 
             //Lowest price for which you can buy an Aged Elinu's Tear from the Trade Broker. This value
             //significantly lowers the profit and should generally be set to 0 unless you are actively
             //buying Elinu's Tears to restore your production points.
-            Console.Write("Price for Aged Elinu's Tear: ");
+            Console.WriteLine(">Price for Aged Elinu's Tear: ");
             double productionPoint_Price = Convert.ToDouble(Console.ReadLine());
 
             //Lowest price for your end product.
-            Console.Write("Minimum Price for Golden Daric: ");
+            Console.WriteLine(">Minimum Price for Golden Daric: ");
             double goldenDaric_Price = Convert.ToDouble(Console.ReadLine());
 
             //Debug outputs.
@@ -43,28 +43,30 @@ namespace RecipeCalculator
             if (profit >= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("You gain " + profit + " gold per produce.");
+                Console.WriteLine(">You gain " + profit + " gold per produce.");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("You lose " + profit * -1 + " gold per produce.");
+                Console.WriteLine(">You lose " + profit * -1 + " gold per produce.");
             }
 
             //Material calculator. You enter your materials for this recipe and get told which ones you need to stock up on and how many.
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+            Console.WriteLine(">If you would like to proceed with the material calculator type 'Yes' and hit enter. ");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("If you would like to proceed with the material calculator type 'Yes' and hit enter. ");
             string answer = Console.ReadLine();
             if (answer == "Yes")
             {
 
-                Console.Write("How many Golden Talents do you have? ");
+                Console.WriteLine(">How many Golden Talents do you have? ");
                 double materialA = Convert.ToDouble(Console.ReadLine());
 
-                Console.Write("How many Craft Kits do you have? ");
+                Console.WriteLine(">How many Craft Kits do you have? ");
                 double materialB = Convert.ToDouble(Console.ReadLine());
 
-                Console.Write("How many Production points do you have? ");
+                Console.WriteLine(">How many Production points do you have? ");
                 double materialC = Convert.ToDouble(Console.ReadLine());
 
                 /* My goal here is to find out which material the player has most of relative to the recipe ratios.
@@ -99,43 +101,43 @@ namespace RecipeCalculator
                     //minus the material B's you already have = the material B's you still need.
                     double materialBNeed = Convert.ToDouble(auxARounded) * 60 - materialB;
                     double materialCNeed = Convert.ToDouble(auxARounded) * 20 - materialC;
-                    Console.WriteLine("You need to buy a total of " + materialBNeed + " Craft Kits and " + materialCNeed + " production points.");
+                    Console.WriteLine(">You need to buy a total of " + materialBNeed + " Craft Kits and " + materialCNeed + " production points.");
                 }
                 else if (auxBRounded > auxARounded & auxBRounded > auxCRounded)
                 {
                     double materialANeed = Convert.ToDouble(auxBRounded) * 5 - materialA;
                     double materialCNeed = Convert.ToDouble(auxBRounded) * 20 - materialC;
-                    Console.WriteLine("You need to buy a total of " + materialANeed + " Golden Talents and " + materialCNeed + " production points.");
+                    Console.WriteLine(">You need to buy a total of " + materialANeed + " Golden Talents and " + materialCNeed + " production points.");
                 }
                 else if (auxCRounded > auxARounded & auxCRounded > auxBRounded)
                 {
                     double materialANeed = Convert.ToDouble(auxCRounded) * 5 - materialA;
                     double materialBNeed = Convert.ToDouble(auxCRounded) * 60 - materialB;
-                    Console.WriteLine("You need to buy a total of " + materialANeed + " Golden Talents and " + materialBNeed + " Craft Kits.");
+                    Console.WriteLine(">You need to buy a total of " + materialANeed + " Golden Talents and " + materialBNeed + " Craft Kits.");
                 }
                 //---*--- RARE-ish EXCEPTIONS ---*---
                 //All of them can produce the same amount of produce or there is no produce that can be crafted
                 else if (auxARounded.Equals(auxBRounded & auxCRounded))
                 {
-                    Console.WriteLine("You either already have the perfect amount of materials or not enough of all of them. Stock up on one of them and retry!");
+                    Console.WriteLine(">You either already have the perfect amount of materials or not enough of all of them. Stock up on one of them and retry!");
                 }
                 //A equals B and both are bigger than C
                 else if (auxARounded.Equals(auxBRounded) & auxARounded > auxCRounded)
                 {
                     double materialCNeed = Convert.ToDouble(auxARounded) * 20 - materialC;
-                    Console.WriteLine("You are missing " + materialCNeed + " production points. Consider buying an Elinu's Tear potion from the Trade Broker or Vanguard Special Rewards Vendor.");
+                    Console.WriteLine(">You are missing " + materialCNeed + " production points. Consider buying an Elinu's Tear potion from the Trade Broker or Vanguard Special Rewards Vendor.");
                 }
                 //A equals C and both are bigger than B
                 else if (auxARounded.Equals(auxCRounded) & auxARounded > auxBRounded)
                 {
                     double materialBNeed = Convert.ToDouble(auxARounded) * 60 - materialB;
-                    Console.WriteLine("You are missing " + materialBNeed + " Craft Kits.");
+                    Console.WriteLine(">You are missing " + materialBNeed + " Craft Kits.");
                 }
                 //B equals C and both are bigger than A
                 else if (auxBRounded.Equals(auxCRounded) & auxBRounded > auxARounded)
                 {
                     double materialANeed = Convert.ToDouble(auxARounded) * 5 - materialA;
-                    Console.WriteLine("You are missing " + materialANeed + " Golden Talents.");
+                    Console.WriteLine(">You are missing " + materialANeed + " Golden Talents.");
                 }
             }
             else
